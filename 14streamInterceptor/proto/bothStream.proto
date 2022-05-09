@@ -5,7 +5,8 @@ package proto;
 //option go_package = "grpc/03serverStream/proto";
 option go_package = "./;proto";
 
-//  protoc --go_out=plugins=grpc:./ .\bothStream.proto
+
+//  protoc -I ./ --go_out=plugins=grpc:.\14streamInterceptor\proto\  .\14streamInterceptor\proto\bothStream.proto
 // 定义我们的服务（可定义多个服务,每个服务可定义多个接口）
 
 service Stream{
