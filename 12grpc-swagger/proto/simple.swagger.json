@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "12grpc-swagger/proto/simple.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/example/route": {
+      "post": {
+        "operationId": "Simple_Route",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoOuterMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoInnerMessage"
+            }
+          }
+        ],
+        "tags": [
+          "Simple"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoInnerMessage": {
+      "type": "object",
+      "properties": {
+        "some_integer": {
+          "type": "integer",
+          "format": "int32",
+          "description": "some_integer can only be in range (1, 100)."
+        },
+        "some_float": {
+          "type": "number",
+          "format": "double",
+          "description": "some_float can only be in range (0;1)."
+        }
+      },
+      "title": "生成swagger    protoc  -I ./ --swagger_out=logtostderr=true:.\\  .\\12grpc-swagger\\proto\\simple.proto"
+    },
+    "protoOuterMessage": {
+      "type": "object",
+      "properties": {
+        "important_string": {
+          "type": "string",
+          "description": "important_string must be a lowercase alpha-numeric of 5 to 30 characters (RE2 syntax)."
+        },
+        "inner": {
+          "$ref": "#/definitions/protoInnerMessage",
+          "description": "proto3 doesn't have `required`, the `msg_exist` enforces presence of InnerMessage."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
