@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package author;
+
+option go_package=  "go-grpc-example/19protoSyntax/proto/author";
+
+message Info {
+  string name = 1;
+}

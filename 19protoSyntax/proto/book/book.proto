@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package book;
+
+option go_package = "go-grpc-example/19protoSyntax/proto/book";
+// 引入同一级目录: 从--proto_path=xx中xx那个路径开始往下写
+import "book/price.proto";
+
+// 导入其他目录中的文件
+import "author/author.proto";
+
+// 导入谷歌的proto， 谷歌的proto要放在proto安装目录的同一级别,或者将google的proto文件复制到当亲目录
+import "google/protobuf/timestamp.proto";
+
+//  同一级目录生成pb.go命令: protoc --proto_path=19protoSyntax/proto --go_out=19protoSyntax/proto --go_opt=paths=source_relative .\19protoSyntax\proto\book\price.proto .\19protoSyntax\proto\book\book.proto
+//  导入其他目录生成pb.go命令:  protoc --proto_path=19protoSyntax/proto --go_out=19protoSyntax/proto --go_opt=paths=source_relative .\19protoSyntax\proto\book\price.proto .\19protoSyntax\proto\book\book.proto .\19protoSyntax\proto\author\author.proto
+//  生成grpc.pb.go命令:  protoc --proto_path=19protoSyntax/proto --go_out=19protoSyntax/proto --go_opt=paths=source_relative --go-grpc_out=19protoSyntax/proto --go-grpc_opt=paths=source_relative .\19protoSyntax\proto\book\price.proto .\19protoSyntax\proto\book\book.proto .\19protoSyntax\proto\author\author.proto
+
+
+message Book {
+  string title = 1;
+  // 导入price.proto文件中
+  Price price = 2;
+  // 导入其他目录的message
+  author.Info author =3;
+
+  // 导入谷歌时间戳
+  google.protobuf.Timestamp data = 4;
+}
+
+// 定义服务
+service BookService {
+  rpc CreateBook(Book)returns(Book) {}
+}
