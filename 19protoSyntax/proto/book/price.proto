@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package book; // 声明protobuf的包名
 
+// 声明生成Go代码的导入路径（import path）
 option go_package = "go-grpc-example/19protoSyntax/proto/book";
 
 // 生成pb.go命令: protoc --proto_path=19protoSyntax/proto --go_out=19protoSyntax/proto --go_opt=paths=source_relative .\19protoSyntax\proto\book\price.proto
@@ -12,5 +13,5 @@ go_out: 执行命令时候添加的参数 paths=source_relative(表示输出文�
 */
 message Price{
   int64 market_price = 1;
-  int64 sale_price = 2;
+  int64 sale_price = 2;  // 建议使用下划线的命名方式
 }

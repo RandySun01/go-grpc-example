@@ -19,7 +19,7 @@ import "google/protobuf/timestamp.proto";
 
 message Book {
   string title = 1;
-  // 导入price.proto文件中
+  // 导入同一级目录proto price.proto文件中
   Price price = 2;
   // 导入其他目录的message
   author.Info author =3;
