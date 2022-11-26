@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package notice;
+option go_package =  "go-grpc-example/20protoLeveFiled/proto/notice";
+import "google/protobuf/field_mask.proto";
+import "notice/wrappers_value.proto";
+// 执行命令:  protoc --proto_path=20protoLevelFiled/proto --go_out=20protoLevelFiled/proto --go_opt=paths=source_relative  .\20protoLevelFiled\proto\notice\wrappers_value.proto .\20protoLevelFiled\proto\notice\filed_mask_value.proto
+
+
+//  UpdateBookRequest 更新书籍的消息
+message UpdateBookRequest {
+  // 操作人
+  string op = 1;
+  // 要更新的书籍信息
+  Book book = 2;
+  // 记录要更新的字段
+  google.protobuf.FieldMask update_mask = 3;
+}

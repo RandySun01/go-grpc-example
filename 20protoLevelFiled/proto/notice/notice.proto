@@ -1,3 +1,17 @@
 syntax = "proto3";
 
-package p
+package notice;
+option go_package =  "go-grpc-example/20protoLeveFiled/proto/notice";
+
+
+// 执行命令:  protoc --proto_path=20protoLevelFiled/proto --go_out=20protoLevelFiled/proto --go_opt=paths=source_relative .\20protoLevelFiled\proto\notice\notice.proto
+
+// 通知读者的消息
+message NoticeReaderRequest{
+  string msg = 1;
+  oneof notice_way{
+    string email = 2;
+    string phone = 3;
+  }
+}
+

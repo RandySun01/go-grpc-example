@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package notice;
+option go_package =  "go-grpc-example/20protoLeveFiled/proto/notice";
+import "google/protobuf/wrappers.proto";
+
+
+// 执行命令:  protoc --proto_path=20protoLevelFiled/proto --go_out=20protoLevelFiled/proto --go_opt=paths=source_relative  .\20protoLevelFiled\proto\notice\wrappers_value.proto
+
+message Book{
+  string title = 1;
+  string author = 2;
+  // 判断是否是默认值或者传零值
+  google.protobuf.Int64Value price = 3;
+  google.protobuf.DoubleValue sale_price = 4; // float64
+  google.protobuf.StringValue memo = 5; // string
+  optional int64 optional_price = 6;  // 使用optional
+
+  message Info{
+    string desc = 1;
+    string name = 2; // book.info.name
+  }
+  Info info = 7; // 修改嵌套字段
+}
