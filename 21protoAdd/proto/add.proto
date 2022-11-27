@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "go-grpc-example/21protoAdd/proto";
+
+// 执行命令:  protoc --proto_path=21protoAdd/proto --go_out=21protoAdd/proto --go_opt=paths=source_relative --go-grpc_out=21protoAdd/proto --go-grpc_opt=paths=source_relative .\21protoAdd\proto\add.proto
+
+// 定义RPC服务
+service CalcService{
+  rpc Add(AddRequest) returns(AddResponse){}
+}
+// 定义消息
+message AddRequest{
+  int32 x = 1;
+  int32 y = 2;
+}
+
+message AddResponse{
+  int64 result = 1;
+}
