@@ -1,0 +1,29 @@
+syntax = "proto3"; // 声明proto版本
+
+// 项目中import导入生成的grpc代码
+option go_package="go-grpc-example/22grpcStream/proto";
+
+package proto; // proto文件模块名
+// 执行命令:  protoc --proto_path=22grpcStream/proto --go_out=22grpcStream/proto --go_opt=paths=source_relative --go-grpc_out=22grpcStream/proto --go-grpc_opt=paths=source_relative .\22grpcStream\proto\stream.proto
+
+// 定义服务
+service Greeter{
+  // 普通交互
+  rpc SayHello (HelloRequest) returns(HelloResponse){}
+
+  // 服务端返回流式数据
+  rpc LotsOfReplies(HelloRequest) returns(stream HelloResponse){}
+  // 客户端返回流式数据
+  rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+
+  // 双向流式数据
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+}
+
+// 定义消息
+message HelloRequest{
+  string name = 1; // 字段序号
+}
+message HelloResponse{
+  string reply = 1;
+}
